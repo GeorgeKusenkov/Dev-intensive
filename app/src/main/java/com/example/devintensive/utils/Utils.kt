@@ -11,4 +11,12 @@ object Utils {
 //        return Pair(firstName, lastName)
         return firstName to lastName // то же самое только короткая запись
     }
+
+    fun transliteration(payload: String, divider: String = " "): String {
+        return "тут должено быть имя на латинице"
+    }
+
+    fun toInitials(firstName: String?, lastName: String?): String? {
+        return "Инициалы ПМ напр"
+    }
 }

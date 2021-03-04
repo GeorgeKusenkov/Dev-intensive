@@ -1,5 +1,9 @@
 package com.example.devintensive
 
+import com.example.devintensive.extensions.TimeUnits
+import com.example.devintensive.extensions.add
+import com.example.devintensive.extensions.format
+import com.example.devintensive.extensions.toUserView
 import com.example.devintensive.models.User
 import org.junit.Test
 
@@ -33,9 +37,14 @@ class ExampleUnitTest {
         val user1 = User.makeUser("Anna Losk")
 //        val user2 = User.makeUser("Yulia Losk")
 //        val user3 = User.makeUser("")
-        val user2 = user1.copy(id = "2", firstName = "Yulia", lastVisit = Date())
-        println(user1)
-        println(user2)
+        val user2 = user1.copy(id = "2", firstName = "Yulia", lastVisit = Date().add(-2, TimeUnits.MINUTE))
+        val user3 = user1.copy(id = "3", firstName = "Svetya", lastVisit = Date().add(4, TimeUnits.HOUR))
+
+        println("""
+            ${Date()?.format()} Current date
+            ${user2.lastVisit?.format()} user2
+            ${user3.lastVisit?.format()} user3
+        """.trimIndent())
     }
 
     @Test
@@ -71,5 +80,14 @@ class ExampleUnitTest {
             println("not equals address ${System.identityHashCode(user)} ${System.identityHashCode(user2)}")
         }
 
+    }
+
+    @Test
+    fun test_data_maping() {
+        val user = User.makeUser("Максим Долгопятов")
+        val newUser = user.copy(lastVisit =  Date().add(-7, TimeUnits.SECOND))
+        val userView = newUser.toUserView()
+
+        userView.printMe()
     }
 }
