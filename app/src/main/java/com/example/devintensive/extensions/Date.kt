@@ -1,5 +1,6 @@
 package com.example.devintensive.extensions
 
+import com.example.devintensive.models.User
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -34,5 +35,16 @@ enum class TimeUnits {
 }
 
 fun Date.humanizeDiff(date: Date = Date()): String {
-    return "столько-то минут назад"
+    val time = this.time - date.time
+    println("""
+        time!: $time
+        date.time: ${date.time}
+        this.time: ${this.time}
+    """.trimIndent())
+
+    when(time){
+        in 0..1 -> return "1 сек"
+        else -> return "20 cek"
+    }
+return  time.toString()
 }

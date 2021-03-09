@@ -78,9 +78,17 @@ class ExampleUnitTest {
 
     @Test
     fun test_data_maping() {
-        val user = User.makeUser("Ега Смарт")
-        val newUser = user.copy(lastVisit =  Date().add(-7, TimeUnits.SECOND))
+        val user = User.makeUser("Zhenya Стереотипов")
+        val newUser = user.copy(lastVisit =  Date().add(-1, TimeUnits.SECOND))
         val userView = newUser.toUserView()
+
+        println(Date().add(-2, TimeUnits.HOUR).humanizeDiff())
+        println(Date())
+//        println(Date().add(-1, TimeUnits.SECOND))
+//        println(Date().add(-1, TimeUnits.SECOND).time)
+//        println("==============")
+//        println(Date().time-Date().add(-1, TimeUnits.SECOND).time)
+//        println(Date().add(-1, TimeUnits.SECOND).time)
 
         userView.printMe()
     }

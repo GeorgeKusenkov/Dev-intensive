@@ -17,18 +17,68 @@ object Utils {
         return firstName to lastName // то же самое только короткая запись
     }
 
-    fun transliteration(payload: String, divider: String = " "): String {
-            var trans: String = "2"
-            trans += "wd"
+    private fun replacement(word: String?) : String {
+        var trans = ""
+        if (word != null) {
+            for (element in word) {
+                when(element) {
+                    'а', 'А' -> trans += "a"
+                    'б', 'Б' -> trans += "b"
+                    'в', 'В' -> trans += "v"
+                    'г', 'Г' -> trans += "g"
+                    'д', 'Д' -> trans += "d"
+                    'е', 'Е' -> trans += "e"
+                    'ё', 'Ё' -> trans += "e"
+                    'ж', 'Ж' -> trans += "zh"
+                    'з', 'З' -> trans += "z"
+                    'и', 'И' -> trans += "i"
+                    'й', 'Й' -> trans += "i"
+                    'к', 'К' -> trans += "k"
+                    'л', 'Л' -> trans += "l"
+                    'м', 'М' -> trans += "m"
+                    'н', 'Н' -> trans += "n"
+                    'о', 'О' -> trans += "o"
+                    'п', 'П' -> trans += "p"
+                    'р', 'Р' -> trans += "r"
+                    'с', 'С' -> trans += "s"
+                    'т', 'Т' -> trans += "t"
+                    'у', 'У' -> trans += "u"
+                    'ф', 'Ф' -> trans += "f"
+                    'х', 'Х' -> trans += "h"
+                    'ц', 'Ц' -> trans += "c"
+                    'ч', 'Ч' -> trans += "ch"
+                    'ш', 'Ш' -> trans += "sh"
+                    'щ', 'Щ' -> trans += "sh"
+                    'ъ', 'Ъ' -> trans += ""
+                    'ы', 'Ы' -> trans += "i"
+                    'ь', 'Ь' -> trans += ""
+                    'э', 'Э' -> trans += "e"
+                    'ю', 'Ю' -> trans += "yu"
+                    'я', 'Я' -> trans += "ya"
+                    else -> trans += element
+                }
+            }
+        }
         return trans
     }
 
+    fun transliteration(payload: String, divider: String = "_"): String {
+        val parts: List<String>? = payload.split(" ")
+        val firstName = parts?.getOrNull(0)
+        val lastName = parts?.getOrNull(1)
+
+        val fName = replacement(firstName).capitalize()
+        val lName = replacement(lastName).capitalize()
+
+        return "${fName}${divider}${lName}"
+    }
+
     fun toInitials(firstName: String?, lastName: String?): String? {
-        when{
-            firstName.isNullOrEmpty() && lastName.isNullOrEmpty() -> return null
-            !firstName.isNullOrEmpty() && lastName.isNullOrEmpty() -> return firstName?.get(0).toString().toUpperCase()
-            firstName.isNullOrEmpty() && !lastName.isNullOrEmpty() -> return lastName?.get(0).toString().toUpperCase()
-            else -> return "${firstName?.get(0).toString()}${lastName?.get(0).toString()}".toUpperCase()
+        return when{
+            firstName.isNullOrEmpty() && lastName.isNullOrEmpty() -> null
+            !firstName.isNullOrEmpty() && lastName.isNullOrEmpty() -> firstName[0].toString().toUpperCase()
+            firstName.isNullOrEmpty() && !lastName.isNullOrEmpty() -> lastName[0].toString().toUpperCase()
+            else -> "${firstName?.get(0).toString()}${lastName?.get(0).toString()}".toUpperCase()
         }
     }
 }
