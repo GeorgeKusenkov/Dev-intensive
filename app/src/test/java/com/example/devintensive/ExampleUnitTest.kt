@@ -1,10 +1,7 @@
 package com.example.devintensive
 
-import com.example.devintensive.extensions.TimeUnits
-import com.example.devintensive.extensions.add
-import com.example.devintensive.extensions.format
-import com.example.devintensive.extensions.toUserView
-import com.example.devintensive.models.User
+import com.example.devintensive.extensions.*
+import com.example.devintensive.models.*
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -34,17 +31,14 @@ class ExampleUnitTest {
 
     @Test
     fun test_factory() {
-        val user1 = User.makeUser("Anna Losk")
-//        val user2 = User.makeUser("Yulia Losk")
-//        val user3 = User.makeUser("")
-        val user2 = user1.copy(id = "2", firstName = "Yulia", lastVisit = Date().add(-2, TimeUnits.MINUTE))
-        val user3 = user1.copy(id = "3", firstName = "Svetya", lastVisit = Date().add(4, TimeUnits.HOUR))
+        val user1 = User("10", "Mando", "Lorec", null, lastVisit = Date())
 
-        println("""
-            ${Date()?.format()} Current date
-            ${user2.lastVisit?.format()} user2
-            ${user3.lastVisit?.format()} user3
-        """.trimIndent())
+       val user2 = User.makeUser("Yulia Losk")
+//        val user3 = User.makeUser("")
+//        val user3 = user1.copy(id = "2", firstName = "Yulia", lastVisit = Date().add(-2, TimeUnits.MINUTE))
+//        val user3 = user1.copy(id = "3", firstName = "Svetya", lastVisit = Date().add(4, TimeUnits.HOUR))
+        val user4 = user1.toUserView()
+        println(user1.lastVisit?.format("HH:mm"))
     }
 
     @Test
@@ -90,4 +84,15 @@ class ExampleUnitTest {
 
         userView.printMe()
     }
+
+    @Test
+    fun test_abstract_factory() {
+        val user = User.makeUser("Егор Кусенков")
+        val txtMessage = BaseMessage.makeMessage(user, Chat("0"), payload = "any txt message", type = "text")
+        val imgMessage = BaseMessage.makeMessage(user, Chat("0"), payload = "any img message", type = "image")
+
+        println(txtMessage.formatMessage())
+        println(imgMessage.formatMessage())
+    }
+
 }
