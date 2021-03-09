@@ -11,7 +11,6 @@ class UserView(
     var status: String? = "offline",
     val initials: String?
 ) {
-
     fun printMe() {
         println("""
         id: $id
@@ -22,6 +21,4 @@ class UserView(
         initials: $initials
         """.trimIndent())
     }
-
-
 }

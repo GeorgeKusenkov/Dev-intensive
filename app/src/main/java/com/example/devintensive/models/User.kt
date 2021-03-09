@@ -26,7 +26,7 @@ data class User (                        //первичный конструкт
     constructor(id:String) : this(id, "Ega", "Smith")
 
         init {
-        println("It's Alive! " +
+        println("Создан новый пользователь " +
                 "${if (lastName==="Smith") "His name is $firstName $lastName" else "And his name is $firstName $lastName"}\n")
         }
 
@@ -36,22 +36,12 @@ data class User (                        //первичный конструкт
         private var lastID: Int = -1
         fun makeUser(fullName:String?) : User {
             lastID++
-
             //разобъём строку на 2 части через пробемл
             //parts - коллекция, которая содержит в себе строки
             val (firstName, lastName) = Utils.parseFullName(fullName)
             return User(id = "$lastID", firstName = firstName, lastName = lastName)
         }
     }
-
-
-
-
-
-
-
-
-
 
 //    //блок инициализации
 //    init {
