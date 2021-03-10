@@ -1,10 +1,13 @@
-package com.example.devintensive
+package ru.skillbranch.devintensive
 
-import com.example.devintensive.extensions.*
-import com.example.devintensive.models.*
+import ru.skillbranch.devintensive.extensions.*
 import org.junit.Test
 
 import org.junit.Assert.*
+import ru.skillbranch.devintensive.extensions.*
+import ru.skillbranch.devintensive.models.BaseMessage
+import ru.skillbranch.devintensive.models.Chat
+import ru.skillbranch.devintensive.models.User
 import java.util.*
 
 /**
@@ -21,7 +24,8 @@ class ExampleUnitTest {
     @Test
     fun test_instance() {
 //        val user = User("1")
-        val user2 = User("2", "Petya", "Smith")
+        val user2 =
+            User("2", "Petya", "Smith")
 //        val user3 = User("3", "Yoda", "Staryi", null, lastVisit =  Date(), isOnline = true)
 
 //        user.printMe()
@@ -31,7 +35,13 @@ class ExampleUnitTest {
 
     @Test
     fun test_factory() {
-        val user1 = User("10", "Mando", "Lorec", null, lastVisit = Date())
+        val user1 = User(
+            "10",
+            "Mando",
+            "Lorec",
+            null,
+            lastVisit = Date()
+        )
 
        val user2 = User.makeUser("Yulia Losk")
 //        val user3 = User.makeUser("")
@@ -96,8 +106,10 @@ class ExampleUnitTest {
     @Test
     fun test_abstract_factory() {
         val user = User.makeUser("Егор Кусенков")
-        val txtMessage = BaseMessage.makeMessage(user, Chat("0"), payload = "any txt message", type = "text")
-        val imgMessage = BaseMessage.makeMessage(user, Chat("0"), payload = "any img message", type = "image")
+        val txtMessage = BaseMessage.makeMessage(user,
+            Chat("0"), payload = "any txt message", type = "text")
+        val imgMessage = BaseMessage.makeMessage(user,
+            Chat("0"), payload = "any img message", type = "image")
 
         println(txtMessage.formatMessage())
         println(imgMessage.formatMessage())

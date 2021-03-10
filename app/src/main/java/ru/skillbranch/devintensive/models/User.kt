@@ -1,6 +1,6 @@
-package com.example.devintensive.models
+package ru.skillbranch.devintensive.models
 
-import com.example.devintensive.utils.Utils
+import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
 
 data class User (                        //первичный конструктор
@@ -39,7 +39,11 @@ data class User (                        //первичный конструкт
             //разобъём строку на 2 части через пробемл
             //parts - коллекция, которая содержит в себе строки
             val (firstName, lastName) = Utils.parseFullName(fullName)
-            return User(id = "$lastID", firstName = firstName, lastName = lastName)
+            return User(
+                id = "$lastID",
+                firstName = firstName,
+                lastName = lastName
+            )
         }
     }
 

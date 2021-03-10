@@ -1,4 +1,4 @@
-package com.example.devintensive.utils
+package ru.skillbranch.devintensive.utils
 
 //Объект - статически объявляемая фкнукция внутри объектов
 object Utils {
@@ -67,8 +67,10 @@ object Utils {
         val firstName = parts?.getOrNull(0)
         val lastName = parts?.getOrNull(1)
 
-        val fName = replacement(firstName).capitalize()
-        val lName = replacement(lastName).capitalize()
+        val fName = replacement(firstName)
+            .capitalize()
+        val lName = replacement(lastName)
+            .capitalize()
 
         return "${fName}${divider}${lName}"
     }
